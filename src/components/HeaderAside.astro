@@ -10,32 +10,35 @@ import Download from "../icons/Download.astro";
 ---
 
 <header>
-  <div class="relative w-full flex items-start justify-start h-32 rounded-2xl">
-    <img class="w-32 h-32 rounded-2xl object-cover" src={userImage.src} alt="user" />
-  </div>
-  <div class="mt-4 md:text-left">
-    <h2 class="text-4xl font-bold text-white">Augusto R.</h2>
-    <div class="space-y-2">
-      <p class="text-[#A2ABB8] mt-2">Ingeniero de sistemas</p>
-      <div class="flex items-center justify-start md:justify-start">
-        <img class="w-4 h-4 mr-2" src={svgWorld.src} alt="world" />
-        <p class="text-[#A2ABB8]">Valledupar, Colombia</p>
-      </div>
-      <span class="text-[#A2ABB8]">augustopelis14@gmail.com</span>
-      <nav class="flex justify-self-start md:justify-start space-x-4 mt-4">
-        <SocialPhill href="mailto:augustopelis4@gmail.com">
-          <Email />
-        </SocialPhill>
-        <SocialPhill href="https://www.linkedin.com/in/augusto-rafael-ara%C3%BAjo-vega-2643a724b/">
-          <Linkedin />
-        </SocialPhill>
-        <SocialPhill href="https://github.com/Augusto0414">
-          <Github />
-        </SocialPhill>
-        <SocialPhill href={CV} download>
-          <Download />
-        </SocialPhill>
-      </nav>
+  <div class="flex items-center gap-6">
+    <img class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover ring-2 ring-gray-800" src={userImage.src} alt="Augusto R." />
+    <div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">Augusto R.</h1>
+      <p class="text-base sm:text-lg text-gray-400 mt-1">Ingeniero de Sistemas</p>
     </div>
   </div>
+  
+  <div class="flex flex-wrap items-center gap-4 sm:gap-6 mt-6 text-sm sm:text-base text-gray-400">
+    <div class="flex items-center gap-2">
+      <img class="w-4 h-4" src={svgWorld.src} alt="location" />
+      <span>Valledupar, Colombia</span>
+    </div>
+    <span class="hidden sm:inline text-gray-700">•</span>
+    <a href="mailto:augustopelis14@gmail.com" class="hover:text-white transition-colors">augustopelis14@gmail.com</a>
+  </div>
+
+  <nav class="flex items-center gap-3 mt-6">
+    <SocialPhill href="mailto:augustopelis4@gmail.com">
+      <Email />
+    </SocialPhill>
+    <SocialPhill href="https://www.linkedin.com/in/augusto-rafael-ara%C3%BAjo-vega-2643a724b/">
+      <Linkedin />
+    </SocialPhill>
+    <SocialPhill href="https://github.com/Augusto0414">
+      <Github />
+    </SocialPhill>
+    <SocialPhill href={CV} download>
+      <Download />
+    </SocialPhill>
+  </nav>
 </header>
