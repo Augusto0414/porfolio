@@ -9,25 +9,45 @@ import CV from "../../public/pdf/IngenieroSistema_AugustoRafaelAraujoVega.pdf";
 import Download from "../icons/Download.astro";
 ---
 
-<header>
-  <div class="flex items-center gap-6">
-    <img class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover ring-2 ring-gray-800" src={userImage.src} alt="Augusto R." />
-    <div>
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight">Augusto R.</h1>
-      <p class="text-base sm:text-lg text-gray-400 mt-1">Ingeniero de Sistemas</p>
+<header class="space-y-8">
+  <!-- Profile Section -->
+  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+    <div class="relative">
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-2xl"></div>
+      <img 
+        class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover ring-2 ring-gray-800/50 shadow-2xl" 
+        src={userImage.src} 
+        alt="Augusto R." 
+      />
     </div>
-  </div>
-  
-  <div class="flex flex-wrap items-center gap-4 sm:gap-6 mt-6 text-sm sm:text-base text-gray-400">
-    <div class="flex items-center gap-2">
-      <img class="w-4 h-4" src={svgWorld.src} alt="location" />
-      <span>Valledupar, Colombia</span>
+    <div class="flex-1 space-y-3">
+      <div>
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight">
+          Augusto R.
+        </h1>
+        <p class="text-xl sm:text-2xl text-gray-400 mt-2 font-light">Ingeniero de Sistemas</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+        <div class="flex items-center gap-2">
+          <img class="w-4 h-4 opacity-70" src={svgWorld.src} alt="location" />
+          <span>Valledupar, Colombia</span>
+        </div>
+        <span class="text-gray-700">•</span>
+        <a href="mailto:augustopelis14@gmail.com" class="hover:text-gray-300 transition-colors">
+          augustopelis14@gmail.com
+        </a>
+      </div>
     </div>
-    <span class="hidden sm:inline text-gray-700">•</span>
-    <a href="mailto:augustopelis14@gmail.com" class="hover:text-white transition-colors">augustopelis14@gmail.com</a>
   </div>
 
-  <nav class="flex items-center gap-3 mt-6">
+  <!-- Bio -->
+  <p class="text-lg sm:text-xl text-gray-400 leading-relaxed max-w-3xl">
+    Desarrollador Full Stack con experiencia en aplicaciones web y móviles, desde interfaces modernas hasta
+    APIs escalables. Manejo de tecnologías como React, Flutter, Node.js, Java y Python.
+  </p>
+
+  <!-- Social Links -->
+  <nav class="flex items-center gap-3">
     <SocialPhill href="mailto:augustopelis4@gmail.com">
       <Email />
     </SocialPhill>
