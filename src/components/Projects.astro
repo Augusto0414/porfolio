@@ -38,253 +38,230 @@ import callcenterImg4 from "../assets/img/CALLCENTER/Captura de pantalla 2025-12
     <img id="lightboxImage" src="" alt="" class="max-w-full max-h-full object-contain" />
   </div>
   
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
     
     <!-- Proyecto 1: Galápago App -->
-    <article class="group border border-gray-800 rounded-lg overflow-hidden bg-gray-900/30">
+    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
       <div class="carousel-container relative">
         <div class="carousel-images overflow-hidden">
           <div class="carousel-track flex transition-transform duration-500">
-            <img src={galappagoImg1.src} alt="Galápago App 1" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={galappagoImg2.src} alt="Galápago App 2" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={galappagoImg3.src} alt="Galápago App 3" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={galappagoImg4.src} alt="Galápago App 4" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
+            <img src={galappagoImg1.src} alt="Galápago App 1" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={galappagoImg2.src} alt="Galápago App 2" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={galappagoImg3.src} alt="Galápago App 3" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={galappagoImg4.src} alt="Galápago App 4" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
           </div>
         </div>
-        <button class="carousel-btn prev absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors">
+        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
         </button>
-        <button class="carousel-btn next absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors">
+        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
           </svg>
         </button>
-        <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer active"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
+        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
         </div>
       </div>
-      <div class="p-5">
+      <div class="p-6">
         <div class="flex justify-between items-start mb-3">
-          <h3 class="text-lg font-semibold text-white">Galápago App</h3>
-          <span class="text-xs px-2 py-1 rounded bg-gray-800/50 text-gray-400 border border-gray-700">Privado</span>
+          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">Galápago App</h3>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">Privado</span>
         </div>
-        <p class="text-sm text-gray-400 mb-3 leading-relaxed line-clamp-3">
+        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
           Aplicación móvil para consultores agrícolas con autenticación Firebase, notificaciones locales y lock screen.
         </p>
         <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">React Native</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Firebase</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">TypeScript</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">React Native</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Firebase</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">TypeScript</span>
         </div>
       </div>
     </article>
 
     <!-- Proyecto 2: Viaja Conmigo -->
-    <article class="group border border-gray-800 rounded-lg overflow-hidden bg-gray-900/30">
+    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
       <div class="carousel-container relative">
         <div class="carousel-images overflow-hidden">
           <div class="carousel-track flex transition-transform duration-500">
-            <img src={viajaImg1.src} alt="Viaja Conmigo 1" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={viajaImg2.src} alt="Viaja Conmigo 2" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={viajaImg3.src} alt="Viaja Conmigo 3" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={viajaImg4.src} alt="Viaja Conmigo 4" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
+            <img src={viajaImg1.src} alt="Viaja Conmigo 1" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={viajaImg2.src} alt="Viaja Conmigo 2" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={viajaImg3.src} alt="Viaja Conmigo 3" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={viajaImg4.src} alt="Viaja Conmigo 4" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
           </div>
         </div>
-        <button class="carousel-btn prev absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors">
+        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
         </button>
-        <button class="carousel-btn next absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors">
+        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
           </svg>
         </button>
-        <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer active"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
+        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
         </div>
       </div>
-      <div class="p-5">
+      <div class="p-6">
         <div class="flex justify-between items-start mb-3">
-          <h3 class="text-lg font-semibold text-white">Viaja Conmigo</h3>
-          <a href="https://github.com/Kanalytics-Technologies/viajaconmigoappreact" 
-             target="_blank" rel="noopener noreferrer"
-             class="text-gray-400 hover:text-white transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-          </a>
+          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">Viaja Conmigo</h3>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">Privado</span>
         </div>
-        <p class="text-sm text-gray-400 mb-3 leading-relaxed line-clamp-3">
+        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
           Aplicación móvil de viajes con React Native y panel administrativo con gestión de estado usando Zustand.
         </p>
         <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">React Native</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">React</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Tailwind</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Zustand</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">React Native</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">React</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Tailwind</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Zustand</span>
         </div>
       </div>
     </article>
 
     <!-- Proyecto 3: Mussico -->
-    <article class="group border border-gray-800 rounded-lg overflow-hidden bg-gray-900/30">
+    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
       <div class="carousel-container relative">
         <div class="carousel-images overflow-hidden">
           <div class="carousel-track flex transition-transform duration-500">
-            <img src={mussicoImg1.src} alt="Mussico 1" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={mussicoImg2.src} alt="Mussico 2" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={mussicoImg3.src} alt="Mussico 3" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={mussicoImg4.src} alt="Mussico 4" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
+            <img src={mussicoImg1.src} alt="Mussico 1" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={mussicoImg2.src} alt="Mussico 2" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={mussicoImg3.src} alt="Mussico 3" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={mussicoImg4.src} alt="Mussico 4" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
           </div>
         </div>
-        <button class="carousel-btn prev absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors">
+        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
         </button>
-        <button class="carousel-btn next absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors">
+        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
           </svg>
         </button>
-        <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer active"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
+        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
         </div>
       </div>
-      <div class="p-5">
+      <div class="p-6">
         <div class="flex justify-between items-start mb-3">
-          <h3 class="text-lg font-semibold text-white">Mussico</h3>
-          <a href="https://github.com/mussico/appmussico" 
-             target="_blank" rel="noopener noreferrer"
-             class="text-gray-400 hover:text-white transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-          </a>
+          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">Mussico</h3>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">Privado</span>
         </div>
-        <p class="text-sm text-gray-400 mb-3 leading-relaxed line-clamp-3">
+        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
           Plataforma para músicos y clientes con gestión de disponibilidad y perfiles desarrollada en Flutter y Firebase.
         </p>
         <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Flutter</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Dart</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Node.js</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">MongoDB</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Docker</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">GCP</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Flutter</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Dart</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Node.js</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">MongoDB</span>
         </div>
       </div>
     </article>
 
     <!-- Proyecto 4: Reconocimiento de Plantas con IA -->
-    <article class="group border border-gray-800 rounded-lg overflow-hidden bg-gray-900/30">
+    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
       <div class="carousel-container relative">
         <div class="carousel-images overflow-hidden">
           <div class="carousel-track flex transition-transform duration-500">
-            <img src={plantasImg1.src} alt="Plantas IA 1" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={plantasImg2.src} alt="Plantas IA 2" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={plantasImg3.src} alt="Plantas IA 3" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={plantasImg4.src} alt="Plantas IA 4" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
+            <img src={plantasImg1.src} alt="Plantas IA 1" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={plantasImg2.src} alt="Plantas IA 2" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={plantasImg3.src} alt="Plantas IA 3" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={plantasImg4.src} alt="Plantas IA 4" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
           </div>
         </div>
-        <button class="carousel-btn prev absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors">
+        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
         </button>
-        <button class="carousel-btn next absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors">
+        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
           </svg>
         </button>
-        <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer active"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
+        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
         </div>
       </div>
-      <div class="p-5">
+      <div class="p-6">
         <div class="flex justify-between items-start mb-3">
-          <h3 class="text-lg font-semibold text-white">Reconocimiento de Plantas IA</h3>
-          <a href="https://github.com/Augusto0414/IA_FLUTTER" 
-             target="_blank" rel="noopener noreferrer"
-             class="text-gray-400 hover:text-white transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-          </a>
+          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">Reconocimiento de Plantas IA</h3>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">Privado</span>
         </div>
-        <p class="text-sm text-gray-400 mb-3 leading-relaxed line-clamp-3">
+        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
           App Flutter con visión computacional, modelo IA en Python y API REST en FastAPI desplegada con Docker.
         </p>
         <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Flutter</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Python</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">FastAPI</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Docker</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Vercel</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">ML</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Flutter</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Python</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">FastAPI</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">ML</span>
         </div>
       </div>
     </article>
 
     <!-- Proyecto 5: Call Center -->
-    <article class="group border border-gray-800 rounded-lg overflow-hidden bg-gray-900/30">
+    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
       <div class="carousel-container relative">
         <div class="carousel-images overflow-hidden">
           <div class="carousel-track flex transition-transform duration-500">
-            <img src={callcenterImg1.src} alt="Call Center 1" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={callcenterImg2.src} alt="Call Center 2" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={callcenterImg3.src} alt="Call Center 3" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
-            <img src={callcenterImg4.src} alt="Call Center 4" class="carousel-image w-full h-64 object-cover flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" />
+            <img src={callcenterImg1.src} alt="Call Center 1" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={callcenterImg2.src} alt="Call Center 2" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={callcenterImg3.src} alt="Call Center 3" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
+            <img src={callcenterImg4.src} alt="Call Center 4" class="carousel-image w-full h-72 object-cover flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300" />
           </div>
         </div>
-        <button class="carousel-btn prev absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors">
+        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
         </button>
-        <button class="carousel-btn next absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors">
+        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
           </svg>
         </button>
-        <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer active"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer"></span>
+        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
+          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
         </div>
       </div>
-      <div class="p-5">
+      <div class="p-6">
         <div class="flex justify-between items-start mb-3">
-          <h3 class="text-lg font-semibold text-white">Call Center Sistema</h3>
-          <span class="text-xs px-2 py-1 rounded bg-gray-800/50 text-gray-400 border border-gray-700">
+          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">Call Center Sistema</h3>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">
             Privado
           </span>
         </div>
-        <p class="text-sm text-gray-400 mb-3 leading-relaxed line-clamp-3">
+        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
           Sistema completo de call center con gestión de llamadas, agentes y reportes en tiempo real desarrollado con tecnologías modernas.
         </p>
         <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">React</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Micronaut</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">Zustand</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">NextUI</span>
-          <span class="px-2 py-0.5 text-xs rounded-md bg-gray-800/50 text-gray-300 border border-gray-700">WhatsApp API</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">React</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Micronaut</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Zustand</span>
+          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">WhatsApp API</span>
         </div>
       </div>
     </article>
@@ -295,26 +272,16 @@ import callcenterImg4 from "../assets/img/CALLCENTER/Captura de pantalla 2025-12
 <style>
   .carousel-container {
     position: relative;
+    overflow: hidden;
   }
 
-  .carousel-btn {
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .carousel-container:hover .carousel-btn {
-    opacity: 1;
+  .carousel-image {
+    transition: transform 0.3s ease;
   }
 
   .dot.active {
     background-color: white;
-  }
-
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    transform: scale(1.2);
   }
 </style>
 
