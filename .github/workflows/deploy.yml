@@ -2,7 +2,8 @@ name: Build, transcode and deploy
 
 on:
   push:
-    branches: [main]
+    # deploy desde `main` y desde ramas de tipo `feature/*` para poder probar despliegues
+    branches: [main, "feature/**"]
   workflow_dispatch:
 
 # Grant write permissions to the workflow token so the action can push to gh-pages
