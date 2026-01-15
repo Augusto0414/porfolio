@@ -87,11 +87,27 @@ import { projects } from '../data/projects';
 
   .lightbox-image {
     border-radius: 8px;
+    max-width: 100%;
+    max-height: calc(95vh - 3rem);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
   }
 
   .lightbox-video {
     background: #000;
     border-radius: 8px;
+  }
+
+  /* Carousel / card images: always fit and remain visible */
+  .carousel-image {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+    display: block;
   }
 
   .close-btn {
@@ -141,6 +157,10 @@ import { projects } from '../data/projects';
       }
     }
     
+    // Asegurar que los modales estén en el <body> para cubrir toda la página
+    if (lightbox && lightbox.parentElement !== document.body) document.body.appendChild(lightbox);
+    if (videoLightbox && videoLightbox.parentElement !== document.body) document.body.appendChild(videoLightbox);
+
     // Funcionalidad del Lightbox (solo para imágenes, no para videos)
     const allImageContainers = document.querySelectorAll('.carousel-track > div');
     allImageContainers.forEach(container => {
@@ -155,8 +175,10 @@ import { projects } from '../data/projects';
         if (img && lightbox && lightboxImage) {
           lightboxImage.src = img.src;
           lightboxImage.alt = img.alt;
+          if (lightbox.parentElement !== document.body) document.body.appendChild(lightbox);
           lightbox.classList.remove('hidden');
           lightbox.classList.add('flex');
+          document.body.classList.add('overflow-hidden');
         }
       };
       
@@ -175,6 +197,7 @@ import { projects } from '../data/projects';
         if (lightbox) {
           lightbox.classList.add('hidden');
           lightbox.classList.remove('flex');
+          document.body.classList.remove('overflow-hidden');
         }
       });
     }
@@ -185,6 +208,7 @@ import { projects } from '../data/projects';
         if (e.target === lightbox) {
           lightbox.classList.add('hidden');
           lightbox.classList.remove('flex');
+          document.body.classList.remove('overflow-hidden');
         }
       });
     }
@@ -195,6 +219,7 @@ import { projects } from '../data/projects';
         if (lightbox && !lightbox.classList.contains('hidden')) {
           lightbox.classList.add('hidden');
           lightbox.classList.remove('flex');
+          document.body.classList.remove('overflow-hidden');
         }
         if (videoLightbox && !videoLightbox.classList.contains('hidden')) {
           videoLightbox.classList.add('hidden');
@@ -204,6 +229,7 @@ import { projects } from '../data/projects';
             // limpiar todos los <source> al cerrar desde ESC
             lightboxVideo.querySelectorAll('source').forEach(s => (s as HTMLSourceElement).setAttribute('src', ''));
             lightboxVideo.load();
+            document.body.classList.remove('overflow-hidden');
           }
         }
       }
@@ -220,6 +246,7 @@ import { projects } from '../data/projects';
             // limpiar todos los <source> para liberar memoria y permitir recarga
             lightboxVideo.querySelectorAll('source').forEach(s => (s as HTMLSourceElement).setAttribute('src', ''));
             lightboxVideo.load();
+            document.body.classList.remove('overflow-hidden');
           }
         }
       });
@@ -235,6 +262,7 @@ import { projects } from '../data/projects';
             lightboxVideo.pause();
             lightboxVideo.querySelectorAll('source').forEach(s => (s as HTMLSourceElement).setAttribute('src', ''));
             lightboxVideo.load();
+            document.body.classList.remove('overflow-hidden');
           }
         }
       });
