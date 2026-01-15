@@ -59,7 +59,13 @@ const toBase = (p: string) => (p.startsWith('/') ? BASE + p.slice(1) : BASE + p)
       <>
         <div class="carousel-images overflow-hidden relative">
           <div class="carousel-track flex transition-transform duration-500">
-            {project.videos.map((video) => (
+            {project.videos.map((video) => {
+              // Ensure we fallback to mp4 source for data attribute logic
+              const mp4Src = video.src.startsWith('/assets/') ? video.src.slice(1) : `assets/img/${video.src}`;
+              // Construct path for WebM version
+              const webmSrc = mp4Src.replace(/\.mp4$/i, '.webm');
+              
+              return (
               <div class="relative w-full flex-shrink-0">
                 <div class="relative w-full h-72 bg-black/40 flex items-center justify-center overflow-hidden group/video">
                   <video 
@@ -69,9 +75,11 @@ const toBase = (p: string) => (p.startsWith('/') ? BASE + p.slice(1) : BASE + p)
                     playsinline
                     loop
                     muted
-                    data-video-src={video.src.startsWith('/assets/') ? toBase(video.src.slice(1)) : toBase(`assets/img/${video.src}`)}
+                    data-video-src={toBase(mp4Src)}
                   >
-                    <!-- Source se carga dinámicamente al hacer click para evitar precarga -->
+                    <source src={toBase(webmSrc)} type="video/webm" />
+                    <source src={toBase(mp4Src)} type="video/mp4" />
+                    Tu navegador no soporta el tag de video.
                   </video>
                   <button class="expand-video absolute top-3 right-3 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2 transition-all duration-200 opacity-0 group-hover/video:opacity-100 z-10">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,7 +95,7 @@ const toBase = (p: string) => (p.startsWith('/') ? BASE + p.slice(1) : BASE + p)
                   </div>
                 </div>
               </div>
-            ))}
+            )})}
           </div>
         </div>
         <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100 z-10">

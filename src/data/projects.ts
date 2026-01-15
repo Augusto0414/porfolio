@@ -118,11 +118,11 @@ export const projects: Project[] = [
     technologies: ["React", "TypeScript", "Multitenant", "Real-time"],
     videos: [
       {
-        src: "/assets/img/DigiTurno/WhatsApp Video 2026-01-14 at 4.07.58 PM.mp4",
+        src: "/assets/img/DigiTurno/digiturno-demo.mp4",
         poster: "DigiTurno/WhatsApp Image 2026-01-14 at 4.04.35 PM.jpeg",
       },
       {
-        src: "/assets/img/DigiTurno/WhatsApp Video 2026-01-14 at 4.09.54 PM.mp4",
+        src: "/assets/img/DigiTurno/digiturno-demo-2.mp4",
         poster: "DigiTurno/WhatsApp Image 2026-01-14 at 4.04.35 PM.jpeg",
       },
     ],
