@@ -13,7 +13,7 @@ const toBase = (p: string) => (p.startsWith('/') ? BASE + p.slice(1) : BASE + p)
 
 <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
   <!-- Carousel/Media Container -->
-  <div class={project.type === 'carousel' ? 'carousel-container relative' : 'relative'}>
+  <div class={project.type === 'carousel' || project.type === 'video' ? 'carousel-container relative' : 'relative'}>
     {project.type === 'carousel' && project.images ? (
       <>
         <div class="carousel-images overflow-hidden relative">
