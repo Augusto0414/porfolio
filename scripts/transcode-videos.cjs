@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { spawnSync } = require("child_process");
+const { spawnSync, spawn } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
@@ -16,10 +16,19 @@ function findMp4Files(dir) {
   return files;
 }
 
-function run(cmd, args) {
+function runSync(cmd, args) {
   console.log("> " + [cmd].concat(args).join(" "));
   const r = spawnSync(cmd, args, { stdio: "inherit" });
   return r.status === 0;
+}
+
+function runAsync(cmd, args) {
+  return new Promise((resolve) => {
+    console.log("> " + [cmd].concat(args).join(" "));
+    const cp = spawn(cmd, args, { stdio: "inherit" });
+    cp.on("close", (code) => resolve(code === 0));
+    cp.on("error", () => resolve(false));
+  });
 }
 
 function ensureFfmpeg() {
@@ -37,30 +46,31 @@ if (!hasFfmpeg) {
   console.warn('ffmpeg no encontrado en PATH. Se crearán copias fallback "-h264.mp4" para garantizar disponibilidad.');
 }
 
-const mp4Files = findMp4Files(PUBLIC_DIR);
+let mp4Files = findMp4Files(PUBLIC_DIR);
+// Filter out files that look like already-generated h264 outputs to avoid reprocessing
+mp4Files = mp4Files.filter((p) => !/[-_]h264\.mp4$/i.test(p));
 if (mp4Files.length === 0) {
   console.log("No se encontraron archivos .mp4 para transcodificar.");
   process.exit(0);
 }
 
-for (const input of mp4Files) {
+// Transcode with limited concurrency
+const MAX_PARALLEL = 3;
+async function processFile(input) {
   const dir = path.dirname(input);
   const base = path.basename(input, path.extname(input));
   const outMp4 = path.join(dir, base + "-h264.mp4");
   const outWebm = path.join(dir, base + ".webm");
 
-  // Skip if outputs already exist and are newer than input
   try {
     const inStat = fs.statSync(input);
-    let skipMp4 = false,
-      skipWebm = false;
-    if (fs.existsSync(outMp4) && fs.statSync(outMp4).mtimeMs >= inStat.mtimeMs) skipMp4 = true;
-    if (fs.existsSync(outWebm) && fs.statSync(outWebm).mtimeMs >= inStat.mtimeMs) skipWebm = true;
+    const skipMp4 = fs.existsSync(outMp4) && fs.statSync(outMp4).mtimeMs >= inStat.mtimeMs;
+    const skipWebm = fs.existsSync(outWebm) && fs.statSync(outWebm).mtimeMs >= inStat.mtimeMs;
 
     if (!skipMp4) {
       if (hasFfmpeg) {
         console.log(`Transcodificando H.264: ${input} → ${outMp4}`);
-        const ok = run("ffmpeg", [
+        const ok = await runAsync("ffmpeg", [
           "-y",
           "-i",
           input,
@@ -68,12 +78,10 @@ for (const input of mp4Files) {
           "libx264",
           "-profile:v",
           "baseline",
-          "-level",
-          "3.0",
           "-pix_fmt",
           "yuv420p",
           "-preset",
-          "medium",
+          "veryfast",
           "-crf",
           "23",
           "-c:a",
@@ -86,7 +94,6 @@ for (const input of mp4Files) {
         ]);
         if (!ok) console.error("Error al generar H.264 para", input);
       } else {
-        // Fallback: copiar el original como -h264.mp4 para asegurar que existe un archivo con ese nombre
         try {
           fs.copyFileSync(input, outMp4);
           console.log("Copia fallback creada:", outMp4);
@@ -94,34 +101,58 @@ for (const input of mp4Files) {
           console.error("Error al copiar fallback H.264:", err);
         }
       }
-    } else console.log("Saltando H.264 (ya existe):", outMp4);
+    } else {
+      console.log("Saltando H.264 (ya existe):", outMp4);
+    }
 
     if (!skipWebm) {
       if (hasFfmpeg) {
         console.log(`Transcodificando WebM: ${input} → ${outWebm}`);
-        const ok2 = run("ffmpeg", [
+        const ok2 = await runAsync("ffmpeg", [
           "-y",
           "-i",
           input,
           "-c:v",
           "libvpx",
           "-crf",
-          "10",
+          "30",
           "-b:v",
           "1M",
+          "-deadline",
+          "good",
+          "-threads",
+          "2",
           "-c:a",
           "libvorbis",
           outWebm,
         ]);
         if (!ok2) console.error("Error al generar WebM para", input);
       } else {
-        // No podemos generar webm sin ffmpeg; sólo avisamos
         console.log("WebM no generado (ffmpeg ausente):", outWebm);
       }
-    } else console.log("Saltando WebM (ya existe):", outWebm);
+    } else {
+      console.log("Saltando WebM (ya existe):", outWebm);
+    }
   } catch (err) {
     console.error("Error procesando", input, err);
   }
 }
 
-console.log("Transcodificación completada.");
+async function runAll() {
+  const queue = mp4Files.slice();
+  const workers = [];
+  for (let i = 0; i < Math.min(MAX_PARALLEL, queue.length); i++) {
+    workers.push(
+      (async function worker() {
+        while (queue.length) {
+          const file = queue.shift();
+          if (!file) break;
+          await processFile(file);
+        }
+      })()
+    );
+  }
+  await Promise.all(workers);
+}
+
+runAll().then(() => console.log("Transcodificación completada."));
