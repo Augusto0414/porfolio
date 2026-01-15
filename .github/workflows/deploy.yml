@@ -59,9 +59,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          # If your repository blocks GITHUB_TOKEN pushes, create a PAT with `repo` scope
-          # and add it as repository secret `GH_PAGES_PAT`. The action will use it when present.
-          personal_token: ${{ secrets.GH_PAGES_PAT }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
