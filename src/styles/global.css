@@ -49,6 +49,7 @@ body {
     0% {
         background-position: -1000px 0;
     }
+
     100% {
         background-position: 1000px 0;
     }
@@ -66,12 +67,10 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(59, 130, 246, 0.1),
-        transparent
-    );
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(59, 130, 246, 0.1),
+            transparent);
     transition: left 0.5s;
 }
 
@@ -85,6 +84,7 @@ body {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -96,6 +96,7 @@ body {
         opacity: 0;
         transform: translateX(-50px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -121,8 +122,8 @@ body {
 }
 
 .fade-in {
-    opacity: 0;
-    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 1;
+    /* Visible por defecto para no bloquear si JS falla */
 }
 
 .fade-in.visible {
@@ -136,6 +137,24 @@ body {
 }
 
 .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fallback: si JS no carga en 2s, mostrar contenido */
+@keyframes showFallback {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scroll-reveal {
+    animation: showFallback 0.5s ease-out 2s forwards;
+}
+
+.scroll-reveal.revealed {
+    animation: none;
     opacity: 1;
     transform: translateY(0);
 }

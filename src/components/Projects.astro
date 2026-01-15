@@ -1,35 +1,6 @@
----
-import galappagoImg1 from "../assets/img/GALAPP/Captura de pantalla 2025-12-25 122027.png";
-import galappagoImg2 from "../assets/img/GALAPP/Captura de pantalla 2025-12-25 122103.png";
-import galappagoImg3 from "../assets/img/GALAPP/Captura de pantalla 2025-12-25 122205.png";
-import galappagoImg4 from "../assets/img/GALAPP/Captura de pantalla 2025-12-25 122319.png";
-
-import viajaImg1 from "../assets/img/VIAJA_CONMIGO/01 00 00 00 00 1.png";
-import viajaImg2 from "../assets/img/VIAJA_CONMIGO/01 00 00 00 00 3.png";
-import viajaImg3 from "../assets/img/VIAJA_CONMIGO/Dashboard 01 00 00 00 00 5.png";
-import viajaImg4 from "../assets/img/VIAJA_CONMIGO/Dashboard 01 00 00 00 00 6.png";
-
-import mussicoImg1 from "../assets/img/MUSSICO/Iniciar sesión.jpg";
-import mussicoImg2 from "../assets/img/MUSSICO/Registrarse.jpg";
-import mussicoImg3 from "../assets/img/MUSSICO/Editar perfil artista.jpg";
-import mussicoImg4 from "../assets/img/MUSSICO/Disponibilidad semana.jpg";
-
-import plantasImg1 from "../assets/img/Reconocimiento_plantas/WhatsApp Image 2025-12-25 at 12.46.13 PM.jpeg";
-import plantasImg2 from "../assets/img/Reconocimiento_plantas/WhatsApp Image 2025-12-25 at 12.46.3 PM.jpeg";
-import plantasImg3 from "../assets/img/Reconocimiento_plantas/WhatsApp Image 2025-12-25 at 12.46d.13 PM.jpeg";
-import plantasImg4 from "../assets/img/Reconocimiento_plantas/WhatsApp Image 2025-12-25 at 12.46sd.12 PM.jpeg";
-
-import callcenterImg1 from "../assets/img/CALLCENTER/Captura de pantalla 2025-12-25 134340.png";
-import callcenterImg2 from "../assets/img/CALLCENTER/Captura de pantalla 2025-12-25 134504.png";
-import callcenterImg3 from "../assets/img/CALLCENTER/Captura de pantalla 2025-12-25 134537.png";
-import callcenterImg4 from "../assets/img/CALLCENTER/Captura de pantalla 2025-12-25 134610.png";
-
-import nuImg1 from "../assets/img/Nu/WhatsApp Image 2026-01-14 at 3.52.13 PM.jpeg";
-import nuImg2 from "../assets/img/Nu/WhatsApp Image 2026-01-14 at 3.52.13 PMs.jpeg";
-import nuImg3 from "../assets/img/Nu/WhatsApp Image 2026-01-14 at 3.5s2.14 PM.jpeg";
-import nuImg4 from "../assets/img/Nu/WhatsApp Image 2026-01s-14 at 3.52.14 PM.jpeg";
-
-import digiturnoImg from "../assets/img/DigiTurno/WhatsApp Image 2026-01-14 at 4.04.35 PM.jpeg";
+﻿---
+import ProjectCard from './ProjectCard.astro';
+import { projects } from '../data/projects';
 ---
 
 <div>
@@ -40,641 +11,39 @@ import digiturnoImg from "../assets/img/DigiTurno/WhatsApp Image 2026-01-14 at 4
   
   <!-- Modal Lightbox para Imágenes -->
   <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
-    <button id="closeLightbox" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors">
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-      </svg>
-    </button>
-    <img id="lightboxImage" src="" alt="" class="max-w-full max-h-full object-contain" />
+    <div class="lightbox-inner relative w-full max-w-[95vw] max-h-[95vh] flex items-center justify-center p-4">
+      <button id="closeLightbox" class="close-btn absolute top-3 right-3 z-20" aria-label="Cerrar">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <img id="lightboxImage" src="" alt="" class="lightbox-image max-w-full max-h-full object-contain rounded-lg shadow-xl" />
+    </div>
   </div>
 
   <!-- Modal Lightbox para Videos -->
   <div id="videoLightbox" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-4">
-    <button id="closeVideoLightbox" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10">
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <button id="closeVideoLightbox" class="close-btn fixed top-4 right-4 z-[9999]" aria-label="Cerrar video">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
       </svg>
     </button>
-    <video id="lightboxVideo" class="max-w-full max-h-full object-contain" controls autoplay playsinline loop>
-      <source id="lightboxVideoSource" src="" type="video/mp4" />
-      Tu navegador no soporta el elemento de video.
-    </video>
+    <div class="lightbox-inner relative w-full max-w-[95vw] max-h-[95vh] flex items-center justify-center p-4">
+        <video id="lightboxVideo" class="lightbox-video w-full h-full max-w-full max-h-full object-contain rounded-lg shadow-xl" controls playsinline loop>
+          <source id="lightboxVideoSourceWebm" src="" type="video/webm" />
+          <source id="lightboxVideoSourceMp4" src="" type="video/mp4" />
+      </video>
+      <div id="lightboxVideoError" class="hidden absolute inset-0 flex items-center justify-center text-center p-6">
+        <div class="bg-black/80 text-white rounded-md p-4 max-w-[90%]">
+          <p class="mb-2">No se puede reproducir este video en tu navegador.</p>
+          <a id="lightboxVideoDownload" class="underline text-sm" href="#" target="_blank" rel="noreferrer">Descargar video</a>
+        </div>
+      </div>
+    </div>
   </div>
   
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    
-    <!-- Proyecto 1: Galápago App -->
-    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
-      <div class="carousel-container relative">
-        <div class="carousel-images overflow-hidden relative">
-          <div class="carousel-track flex transition-transform duration-500">
-            <div class="relative w-full flex-shrink-0">
-              <img src={galappagoImg1.src} alt="Galápago App 1" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={galappagoImg2.src} alt="Galápago App 2" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={galappagoImg3.src} alt="Galápago App 3" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={galappagoImg4.src} alt="Galápago App 4" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
-        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-        </div>
-      </div>
-      <div class="p-6">
-        <div class="flex justify-between items-start mb-3">
-          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">Galápago App</h3>
-          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">Privado</span>
-        </div>
-        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
-          Aplicación móvil para consultores agrícolas con autenticación Firebase, notificaciones locales y lock screen.
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">React Native</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Firebase</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">TypeScript</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- Proyecto 2: Viaja Conmigo -->
-    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
-      <div class="carousel-container relative">
-        <div class="carousel-images overflow-hidden relative">
-          <div class="carousel-track flex transition-transform duration-500">
-            <div class="relative w-full flex-shrink-0">
-              <img src={viajaImg1.src} alt="Viaja Conmigo 1" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={viajaImg2.src} alt="Viaja Conmigo 2" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={viajaImg3.src} alt="Viaja Conmigo 3" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={viajaImg4.src} alt="Viaja Conmigo 4" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
-        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-        </div>
-      </div>
-      <div class="p-6">
-        <div class="flex justify-between items-start mb-3">
-          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">Viaja Conmigo</h3>
-          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">Privado</span>
-        </div>
-        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
-          Aplicación móvil de viajes con React Native y panel administrativo con gestión de estado usando Zustand.
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">React Native</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">React</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Tailwind</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Zustand</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- Proyecto 3: Mussico -->
-    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
-      <div class="carousel-container relative">
-        <div class="carousel-images overflow-hidden relative">
-          <div class="carousel-track flex transition-transform duration-500">
-            <div class="relative w-full flex-shrink-0">
-              <img src={mussicoImg1.src} alt="Mussico 1" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={mussicoImg2.src} alt="Mussico 2" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={mussicoImg3.src} alt="Mussico 3" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={mussicoImg4.src} alt="Mussico 4" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
-        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-        </div>
-      </div>
-      <div class="p-6">
-        <div class="flex justify-between items-start mb-3">
-          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">Mussico</h3>
-          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">Privado</span>
-        </div>
-        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
-          Plataforma para músicos y clientes con gestión de disponibilidad y perfiles desarrollada en Flutter y Firebase.
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Flutter</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Dart</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Node.js</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">MongoDB</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- Proyecto 4: Reconocimiento de Plantas con IA -->
-    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
-      <div class="carousel-container relative">
-        <div class="carousel-images overflow-hidden relative">
-          <div class="carousel-track flex transition-transform duration-500">
-            <div class="relative w-full flex-shrink-0">
-              <img src={plantasImg1.src} alt="Plantas IA 1" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={plantasImg2.src} alt="Plantas IA 2" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={plantasImg3.src} alt="Plantas IA 3" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={plantasImg4.src} alt="Plantas IA 4" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
-        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-        </div>
-      </div>
-      <div class="p-6">
-        <div class="flex justify-between items-start mb-3">
-          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">Reconocimiento de Plantas IA</h3>
-          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">Privado</span>
-        </div>
-        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
-          App Flutter con visión computacional, modelo IA en Python y API REST en FastAPI desplegada con Docker.
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Flutter</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Python</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">FastAPI</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">ML</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- Proyecto 5: Nu Clone -->
-    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
-      <div class="carousel-container relative">
-        <div class="carousel-images overflow-hidden relative">
-          <div class="carousel-track flex transition-transform duration-500">
-            <div class="relative w-full flex-shrink-0">
-              <img src={nuImg1.src} alt="Nu Clone 1" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={nuImg2.src} alt="Nu Clone 2" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={nuImg3.src} alt="Nu Clone 3" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={nuImg4.src} alt="Nu Clone 4" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
-        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-        </div>
-      </div>
-      <div class="p-6">
-        <div class="flex justify-between items-start mb-3">
-          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">Nu Clone</h3>
-          <a href="https://github.com/Augusto0414/NuBank-Clone" target="_blank" rel="noopener noreferrer" class="text-xs px-2.5 py-1 rounded-full bg-purple-900/30 text-purple-300 border border-purple-700/50 backdrop-blur-sm hover:bg-purple-900/50 transition-colors flex items-center gap-1.5">
-            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            <span>GitHub</span>
-          </a>
-        </div>
-        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
-          Clon de la aplicación NuBank desarrollado como proyecto personal para practicar desarrollo móvil moderno y diseño de interfaces financieras.
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">React Native</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">TypeScript</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Mobile</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- Proyecto 6: Call Center -->
-    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
-      <div class="carousel-container relative">
-        <div class="carousel-images overflow-hidden relative">
-          <div class="carousel-track flex transition-transform duration-500">
-            <div class="relative w-full flex-shrink-0">
-              <img src={callcenterImg1.src} alt="Call Center 1" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={callcenterImg2.src} alt="Call Center 2" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={callcenterImg3.src} alt="Call Center 3" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-            <div class="relative w-full flex-shrink-0">
-              <img src={callcenterImg4.src} alt="Call Center 4" class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300" />
-              <div class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer">
-                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                  </svg>
-                  <span class="text-white font-medium text-sm">Click para ampliar</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
-        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-        </div>
-      </div>
-      <div class="p-6">
-        <div class="flex justify-between items-start mb-3">
-          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">Call Center Sistema</h3>
-          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">
-            Privado
-          </span>
-        </div>
-        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
-          Sistema completo de call center con gestión de llamadas, agentes y reportes en tiempo real desarrollado con tecnologías modernas.
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">React</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Micronaut</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Zustand</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">WhatsApp API</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- Proyecto 7: DigiTurno (Qflow) -->
-    <article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
-      <div class="carousel-container relative">
-        <div class="carousel-images overflow-hidden relative">
-          <div class="carousel-track flex transition-transform duration-500">
-            <!-- Video 1 -->
-            <div class="relative w-full flex-shrink-0">
-              <div class="relative w-full h-72 bg-black/40 flex items-center justify-center overflow-hidden group/video">
-                <video 
-                  class="digiturno-video w-full h-full object-cover cursor-pointer" 
-                  poster={digiturnoImg.src}
-                  preload="metadata"
-                  playsinline
-                  loop
-                  data-video-src="/src/assets/img/DigiTurno/WhatsApp Video 2026-01-14 at 4.07.58 PM.mp4"
-                >
-                  <source src="/src/assets/img/DigiTurno/WhatsApp Video 2026-01-14 at 4.07.58 PM.mp4" type="video/mp4" />
-                  Tu navegador no soporta el elemento de video.
-                </video>
-                <!-- Botón de ampliar -->
-                <button class="expand-video absolute top-3 right-3 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2 transition-all duration-200 opacity-0 group-hover/video:opacity-100 z-10">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
-                  </svg>
-                </button>
-                <div class="video-overlay absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300 cursor-pointer">
-                  <div class="play-button bg-white/20 backdrop-blur-md rounded-full p-6 border-2 border-white/60 transition-transform hover:scale-110">
-                    <svg class="w-12 h-12 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Video 2 -->
-            <div class="relative w-full flex-shrink-0">
-              <div class="relative w-full h-72 bg-black/40 flex items-center justify-center overflow-hidden group/video">
-                <video 
-                  class="digiturno-video w-full h-full object-cover cursor-pointer" 
-                  poster={digiturnoImg.src}
-                  preload="metadata"
-                  playsinline
-                  loop
-                  data-video-src="/src/assets/img/DigiTurno/WhatsApp Video 2026-01-14 at 4.09.54 PM.mp4"
-                >
-                  <source src="/src/assets/img/DigiTurno/WhatsApp Video 2026-01-14 at 4.09.54 PM.mp4" type="video/mp4" />
-                  Tu navegador no soporta el elemento de video.
-                </video>
-                <!-- Botón de ampliar -->
-                <button class="expand-video absolute top-3 right-3 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2 transition-all duration-200 opacity-0 group-hover/video:opacity-100 z-10">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
-                  </svg>
-                </button>
-                <div class="video-overlay absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300 cursor-pointer">
-                  <div class="play-button bg-white/20 backdrop-blur-md rounded-full p-6 border-2 border-white/60 transition-transform hover:scale-110">
-                    <svg class="w-12 h-12 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100 z-10">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-        <button class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100 z-10">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
-        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer active backdrop-blur-sm transition-all duration-200"></span>
-          <span class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200"></span>
-        </div>
-      </div>
-      <div class="p-6">
-        <div class="flex justify-between items-start mb-3">
-          <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">DigiTurno (Qflow)</h3>
-          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">Privado</span>
-        </div>
-        <p class="text-sm text-gray-400 mb-4 leading-relaxed">
-          Sistema digital de gestión de turnos multitenant para hospitales con gestión de colas, notificaciones en tiempo real y panel administrativo.
-        </p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">React</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">TypeScript</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Multitenant</span>
-          <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">Real-time</span>
-        </div>
-      </div>
-    </article>
-
+    {projects.map((project) => <ProjectCard project={project} />)}
   </div>
 </div>
 
@@ -696,11 +65,56 @@ import digiturnoImg from "../assets/img/DigiTurno/WhatsApp Image 2026-01-14 at 4
   .video-overlay {
     opacity: 1;
     pointer-events: all;
+    z-index: 5;
+    cursor: pointer;
   }
 
   .digiturno-video.playing ~ .video-overlay {
     opacity: 0;
     pointer-events: none;
+  }
+
+  /* Lightbox styles */
+  .lightbox-inner {
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    overflow: hidden;
+    animation: fadeInScale .18s ease-out both;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-image {
+    border-radius: 8px;
+  }
+
+  .lightbox-video {
+    background: #000;
+    border-radius: 8px;
+  }
+
+  .close-btn {
+    background: rgba(0,0,0,0.5);
+    padding: 6px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    transition: background .15s ease, transform .08s ease;
+  }
+
+  .close-btn:focus,
+  .close-btn:hover {
+    background: rgba(255,255,255,0.06);
+    transform: scale(1.02);
+    outline: none;
+  }
+
+  @keyframes fadeInScale {
+    from { opacity: 0; transform: scale(.985); }
+    to   { opacity: 1; transform: scale(1); }
   }
 </style>
 
@@ -713,8 +127,19 @@ import digiturnoImg from "../assets/img/DigiTurno/WhatsApp Image 2026-01-14 at 4
     
     const videoLightbox = document.getElementById('videoLightbox');
     const lightboxVideo = document.getElementById('lightboxVideo') as HTMLVideoElement;
-    const lightboxVideoSource = document.getElementById('lightboxVideoSource') as HTMLSourceElement;
+    const srcWebmEl = document.getElementById('lightboxVideoSourceWebm') as HTMLSourceElement;
+    const srcMp4El = document.getElementById('lightboxVideoSourceMp4') as HTMLSourceElement;
     const closeVideoLightbox = document.getElementById('closeVideoLightbox');
+
+    // Helper para comprobar existencia de recursos vía HEAD (reutilizable)
+    async function exists(url: string): Promise<boolean> {
+      try {
+        const r = await fetch(url, { method: 'HEAD' });
+        return r.ok;
+      } catch (e) {
+        return false;
+      }
+    }
     
     // Funcionalidad del Lightbox (solo para imágenes, no para videos)
     const allImageContainers = document.querySelectorAll('.carousel-track > div');
@@ -723,7 +148,8 @@ import digiturnoImg from "../assets/img/DigiTurno/WhatsApp Image 2026-01-14 at 4
       const hasVideo = container.querySelector('.digiturno-video');
       if (hasVideo) return; // Saltar si es un contenedor de video
       
-      container.addEventListener('click', (e) => {
+      // Añadir click a todo el contenedor y al overlay
+      const clickHandler = (e: Event) => {
         e.stopPropagation();
         const img = container.querySelector('.carousel-image') as HTMLImageElement;
         if (img && lightbox && lightboxImage) {
@@ -732,7 +158,15 @@ import digiturnoImg from "../assets/img/DigiTurno/WhatsApp Image 2026-01-14 at 4
           lightbox.classList.remove('hidden');
           lightbox.classList.add('flex');
         }
-      });
+      };
+      
+      container.addEventListener('click', clickHandler);
+      
+      // También añadir al overlay específicamente
+      const overlay = container.querySelector('.absolute.inset-0');
+      if (overlay) {
+        overlay.addEventListener('click', clickHandler);
+      }
     });
 
     // Cerrar lightbox con botón X
@@ -767,6 +201,9 @@ import digiturnoImg from "../assets/img/DigiTurno/WhatsApp Image 2026-01-14 at 4
           videoLightbox.classList.remove('flex');
           if (lightboxVideo) {
             lightboxVideo.pause();
+            // limpiar todos los <source> al cerrar desde ESC
+            lightboxVideo.querySelectorAll('source').forEach(s => (s as HTMLSourceElement).setAttribute('src', ''));
+            lightboxVideo.load();
           }
         }
       }
@@ -780,6 +217,9 @@ import digiturnoImg from "../assets/img/DigiTurno/WhatsApp Image 2026-01-14 at 4
           videoLightbox.classList.remove('flex');
           if (lightboxVideo) {
             lightboxVideo.pause();
+            // limpiar todos los <source> para liberar memoria y permitir recarga
+            lightboxVideo.querySelectorAll('source').forEach(s => (s as HTMLSourceElement).setAttribute('src', ''));
+            lightboxVideo.load();
           }
         }
       });
@@ -793,6 +233,8 @@ import digiturnoImg from "../assets/img/DigiTurno/WhatsApp Image 2026-01-14 at 4
           videoLightbox.classList.remove('flex');
           if (lightboxVideo) {
             lightboxVideo.pause();
+            lightboxVideo.querySelectorAll('source').forEach(s => (s as HTMLSourceElement).setAttribute('src', ''));
+            lightboxVideo.load();
           }
         }
       });
@@ -801,24 +243,78 @@ import digiturnoImg from "../assets/img/DigiTurno/WhatsApp Image 2026-01-14 at 4
     // Botones de ampliar video
     const expandButtons = document.querySelectorAll('.expand-video');
     expandButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
+      button.addEventListener('click', async (e) => {
         e.stopPropagation();
-        const container = (button as HTMLElement).closest('.group\\/video');
+        const container = (button as HTMLElement).closest('.group\/video');
         if (!container) return;
-        
+
         const video = container.querySelector('.digiturno-video') as HTMLVideoElement;
         if (!video) return;
-        
+
         const videoSrc = video.getAttribute('data-video-src');
-        if (videoSrc && videoLightbox && lightboxVideo && lightboxVideoSource) {
-          lightboxVideoSource.src = videoSrc;
-          lightboxVideo.load();
-          videoLightbox.classList.remove('hidden');
-          videoLightbox.classList.add('flex');
-          lightboxVideo.play();
-        }
+        if (!videoSrc || !videoLightbox || !lightboxVideo) return;
+
+        // Derivar rutas esperadas
+        const encoded = encodeURI(videoSrc);
+        const urlObj = new URL(encoded, location.origin);
+        const dirname = urlObj.pathname.substring(0, urlObj.pathname.lastIndexOf('/'));
+        const filename = urlObj.pathname.substring(urlObj.pathname.lastIndexOf('/') + 1);
+        const base = filename.replace(/\.mp4$/i, '');
+        const webmPath = `${dirname}/${base}.webm`;
+        const h264Path = `${dirname}/${base}-h264.mp4`;
+
+        const srcWebmEl = document.getElementById('lightboxVideoSourceWebm') as HTMLSourceElement;
+        const srcMp4El = document.getElementById('lightboxVideoSourceMp4') as HTMLSourceElement;
+
+        const originBase = location.origin;
+        let chosenWebm = null;
+        let chosenMp4 = null;
+
+        if (await exists(webmPath)) chosenWebm = webmPath;
+        if (await exists(h264Path)) chosenMp4 = h264Path;
+        // if neither transcode exists, fallback to original MP4
+        if (!chosenMp4 && await exists(encoded)) chosenMp4 = encoded;
+
+        if (srcWebmEl) srcWebmEl.src = chosenWebm || '';
+        if (srcMp4El) srcMp4El.src = chosenMp4 || '';
+
+        lightboxVideo.load();
+        videoLightbox.classList.remove('hidden');
+        videoLightbox.classList.add('flex');
+        if (closeVideoLightbox) closeVideoLightbox.focus();
+
+        // intentar play iniciando muteado para evitar bloqueo del navegador
+        lightboxVideo.muted = true;
+        lightboxVideo.play().then(() => {
+          setTimeout(() => { try { lightboxVideo.muted = false; } catch(e){} }, 150);
+        }).catch(err => {
+          console.error('Error reproducir video en lightbox:', err);
+        });
       });
     });
+
+        // Manejo de errores en el reproductor del lightbox
+        const lightboxVideoError = document.getElementById('lightboxVideoError');
+        const lightboxVideoDownload = document.getElementById('lightboxVideoDownload');
+        if (lightboxVideo) {
+          lightboxVideo.addEventListener('error', (ev) => {
+            console.error('Error en lightboxVideo:', ev, lightboxVideo.currentSrc);
+            if (lightboxVideoError) {
+              lightboxVideoError.classList.remove('hidden');
+              lightboxVideoError.classList.add('flex');
+            }
+            if (lightboxVideoDownload && lightboxVideo.currentSrc) {
+              (lightboxVideoDownload as HTMLAnchorElement).href = lightboxVideo.currentSrc;
+            }
+          });
+
+          lightboxVideo.addEventListener('loadeddata', () => {
+            if (lightboxVideoError) {
+              lightboxVideoError.classList.add('hidden');
+              lightboxVideoError.classList.remove('flex');
+            }
+          });
+        }
     
     // Funcionalidad del Carrusel
     carousels.forEach(carousel => {
@@ -874,37 +370,95 @@ import digiturnoImg from "../assets/img/DigiTurno/WhatsApp Image 2026-01-14 at 4
       });
     });
 
-    // Funcionalidad del Video
-    const videoElements = document.querySelectorAll('.digiturno-video');
-    videoElements.forEach(video => {
-      const container = video.parentElement;
-      if (!container) return;
-      
+    // Funcionalidad del Video - usando delegación de eventos más robusta
+    const videoContainers = document.querySelectorAll('.group\\/video');
+    
+    videoContainers.forEach(container => {
+      const video = container.querySelector('.digiturno-video') as HTMLVideoElement;
       const overlay = container.querySelector('.video-overlay') as HTMLElement;
-      if (!overlay) return;
+      
+      if (!video || !overlay) {
+        console.log('Video o overlay no encontrado');
+        return;
+      }
 
-      // Click en el overlay para reproducir
-      overlay.addEventListener('click', (e) => {
-        e.stopPropagation(); // Evitar que se propague al carrusel
-        video.classList.add('playing');
-        (video as HTMLVideoElement).play();
+      console.log('Video configurado:', video.dataset.videoSrc);
+
+      // Click en el overlay: abrir el lightbox de video (mejor experiencia)
+      overlay.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        const videoSrc = video.dataset.videoSrc;
+        if (!videoSrc || !videoLightbox || !lightboxVideo || (!srcWebmEl && !srcMp4El)) return;
+
+        // Pause cualquier video en el card
+        try {
+          const siblingVideos = document.querySelectorAll('.digiturno-video');
+          siblingVideos.forEach(v => { try { (v as HTMLVideoElement).pause(); } catch{} });
+        } catch {}
+
+        // Usar URL codificada para evitar problemas con espacios
+        const encoded = encodeURI(videoSrc);
+        const urlObj = new URL(encoded, location.origin);
+        const dirname = urlObj.pathname.substring(0, urlObj.pathname.lastIndexOf('/'));
+        const filename = urlObj.pathname.substring(urlObj.pathname.lastIndexOf('/') + 1);
+        const base = filename.replace(/\.mp4$/i, '');
+        const webmPath = `${dirname}/${base}.webm`;
+        const h264Path = `${dirname}/${base}-h264.mp4`;
+
+        let chosenWebm = null;
+        let chosenMp4 = null;
+
+        if (await exists(webmPath)) chosenWebm = webmPath;
+        if (await exists(h264Path)) chosenMp4 = h264Path;
+        if (!chosenMp4 && await exists(encoded)) chosenMp4 = encoded;
+
+        if (srcWebmEl) srcWebmEl.src = chosenWebm || '';
+        if (srcMp4El) srcMp4El.src = chosenMp4 || '';
+
+        lightboxVideo.load();
+
+        videoLightbox.classList.remove('hidden');
+        videoLightbox.classList.add('flex');
+        if (closeVideoLightbox) closeVideoLightbox.focus();
+
+        // Reproducir en el modal iniciando muteado para evitar bloqueo del navegador
+        lightboxVideo.muted = true;
+        lightboxVideo.play().then(() => {
+          setTimeout(() => { try { lightboxVideo.muted = false; } catch(e){} }, 150);
+        }).catch(err => {
+          console.error('Error reproducir video en lightbox:', err);
+        });
       });
 
       // Click en el video para pausar
       video.addEventListener('click', (e) => {
-        e.stopPropagation(); // Evitar que se propague al carrusel
-        if (!(video as HTMLVideoElement).paused) {
-          (video as HTMLVideoElement).pause();
-          video.classList.remove('playing');
+        e.stopPropagation();
+        if (!video.paused) {
+          video.pause();
         }
       });
 
       // Mostrar overlay cuando el video termina o se pausa
       video.addEventListener('pause', () => {
         video.classList.remove('playing');
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'all';
       });
 
       video.addEventListener('ended', () => {
+        video.classList.remove('playing');
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'all';
+        video.currentTime = 0;
+      });
+      
+      // Evento de error de carga
+      video.addEventListener('error', (e) => {
+        console.error('Error cargando video:', video.src, e);
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'all';
         video.classList.remove('playing');
       });
     });
