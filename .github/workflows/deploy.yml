@@ -59,6 +59,15 @@ jobs:
           echo "dist listing:"
           ls -la ./dist || echo "dist not found"
 
+      - name: Ensure .nojekyll
+        run: |
+          if [ -d "./dist" ]; then
+            touch ./dist/.nojekyll
+            echo ".nojekyll created in dist"
+          else
+            echo "dist not found, skipping .nojekyll creation"
+          fi
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:

@@ -2,7 +2,6 @@
 import Aside from "../components/Aside.astro";
 import "../styles/global.css";
 const BASE = import.meta.env.BASE_URL || '/';
-const BUILD_TS = import.meta.env.VITE_BUILD_TS || String(Date.now());
 ---
 
 <!doctype html>
@@ -13,21 +12,6 @@ const BUILD_TS = import.meta.env.VITE_BUILD_TS || String(Date.now());
 		<link rel="icon" type="image/svg+xml" href={BASE + 'favicon.svg'} />
 		<meta name="generator" content={Astro.generator} />
 		<title>Porfolio - augusto0414</title>
-		<script>
-			// Append build timestamp to generated _astro CSS to bust caches after deploy
-			(function(){
-				const ts = "{BUILD_TS}";
-				try{
-					const links = document.querySelectorAll && document.querySelectorAll('link[rel="stylesheet"]');
-					if(!links) return;
-					links.forEach(l=>{
-						if(l.href && l.href.includes('/_astro/')){
-							l.href = l.href + (l.href.includes('?') ? '&' : '?') + 'v=' + ts;
-						}
-					});
-				}catch(e){}
-			})();
-		</script>
 	</head>
 	<body class="relative text-black dark:text-white">
 		<Aside />
