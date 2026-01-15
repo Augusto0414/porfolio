@@ -25,12 +25,18 @@ export default defineConfig({
       }),
       svgr(),
     ],
+    build: {
+      rollupOptions: {
+        output: {
+          // Añade hash a todos los archivos JS
+          entryFileNames: "assets/[name].[hash].js",
+          chunkFileNames: "assets/[name].[hash].js",
+          // Añade hash a CSS, imágenes, fonts, etc.
+          assetFileNames: "assets/[name].[hash].[ext]",
+        },
+      },
+    },
   },
-  // adapter: vercel({
-  //   webAnalytics: {
-  //     enabled: true,
-  //   },
-  // }),
   image: {
     service: {
       entrypoint: "astro/assets/services/sharp",
