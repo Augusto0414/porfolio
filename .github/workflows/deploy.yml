@@ -15,7 +15,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pages: write
       id-token: write
     steps:
@@ -48,14 +48,19 @@ jobs:
         run: npm run build
 
       - name: Show built files (debug)
-        run: ls -la ./dist || echo "dist not found"
+        run: |
+          echo "PWD: $(pwd)"
+          echo "Workspace listing:"
+          ls -la .
+          echo "dist listing:"
+          ls -la ./dist || echo "dist not found"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          # Prefer GITHUB_TOKEN; if you still get 403, create a personal access token
-          # with `repo` scope and set it as repository secret `GH_PAGES_PAT`, then
-          # replace the line below with `personal_token: ${{ secrets.GH_PAGES_PAT }}`
+          # If your repository blocks GITHUB_TOKEN pushes, create a PAT with `repo` scope
+          # and add it as repository secret `GH_PAGES_PAT`. The action will use it when present.
+          personal_token: ${{ secrets.GH_PAGES_PAT }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
