@@ -3,7 +3,7 @@ import HeaderAside from "./HeaderAside.astro";
 import "../styles/global.css";
 import Experience from "./Experience.astro";
 import Tecnologies from "./Tecnologies.astro";
-import Projects from "./Projects.astro";
+import Projects from "./Projects.svelte";
 import SpotifySection from "./SpotifySection.astro";
 ---
 
@@ -45,7 +45,7 @@ import SpotifySection from "./SpotifySection.astro";
 
         <!-- Projects Card - Ocupa toda la fila -->
         <div class="md:col-span-2 lg:col-span-3 bento-card scroll-reveal">
-          <Projects />
+          <Projects client:visible />
         </div>
 
       </div>

@@ -1,0 +1,266 @@
+<script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+  import type { Project } from '../data/projects';
+
+  export let project: Project;
+
+  const dispatch = createEventDispatcher();
+  const BASE = import.meta.env.BASE_URL || '/';
+  const toBase = (p: string) => (p.startsWith('/') ? BASE + p.slice(1) : BASE + p);
+
+  let currentIndex = 0;
+  let carouselTrack: HTMLElement;
+
+  function nextSlide(e: Event) {
+    e.stopPropagation();
+    const total = project.images ? project.images.length : (project.videos ? project.videos.length : 0);
+    if (total === 0) return;
+    currentIndex = (currentIndex + 1) % total;
+  }
+
+  function prevSlide(e: Event) {
+    e.stopPropagation();
+    const total = project.images ? project.images.length : (project.videos ? project.videos.length : 0);
+    if (total === 0) return;
+    currentIndex = (currentIndex - 1 + total) % total;
+  }
+
+  function goToSlide(e: Event, idx: number) {
+    e.stopPropagation();
+    currentIndex = idx;
+  }
+
+  function handleImageClick(image: { src: string; alt: string }) {
+    dispatch('openImageLightbox', {
+      src: toBase(`assets/img/${image.src}`),
+      alt: image.alt
+    });
+  }
+
+  function handleVideoClick(video: { src: string; poster: string }) {
+      dispatch('openVideoLightbox', {
+          videoSrc: video.src
+      });
+  }
+</script>
+
+<article class="group relative border border-gray-800/50 rounded-xl overflow-hidden bg-gradient-to-br from-gray-900/40 to-gray-900/20 backdrop-blur-sm hover:border-gray-700/50 transition-all duration-300">
+  <!-- Carousel/Media Container -->
+  <div class={project.type === 'carousel' || project.type === 'video' ? 'carousel-container relative' : 'relative'}>
+    {#if project.type === 'carousel' && project.images}
+      <div class="carousel-images overflow-hidden relative">
+        <div 
+            class="carousel-track flex transition-transform duration-500"
+            style="transform: translateX(-{currentIndex * 100}%)"
+            bind:this={carouselTrack}
+        >
+          {#each project.images as image, idx}
+            <div class="relative w-full flex-shrink-0">
+               <!-- svelte-ignore a11y-click-events-have-key-events -->
+               <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+              <img 
+                src={toBase(`assets/img/${image.src}`)}
+                alt={image.alt}
+                class="carousel-image w-full h-72 object-cover cursor-pointer transition-transform duration-300"
+                loading={idx === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                on:click|stopPropagation={() => handleImageClick(image)}
+              />
+              <!-- svelte-ignore a11y-click-events-have-key-events -->
+              <!-- svelte-ignore a11y-no-static-element-interactions -->
+              <div 
+                class="absolute inset-0 bg-black/0 hover:bg-black/50 transition-all duration-300 flex items-center justify-center group/img cursor-pointer"
+                on:click|stopPropagation={() => handleImageClick(image)}
+              >
+                <div class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-2">
+                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                  </svg>
+                  <span class="text-white font-medium text-sm">Click para ampliar</span>
+                </div>
+              </div>
+            </div>
+          {/each}
+        </div>
+      </div>
+      
+      {#if project.images.length > 1}
+        <button on:click={prevSlide} class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <button on:click={nextSlide} class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+        <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          {#each project.images as _, idx}
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <span 
+                class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200 {idx === currentIndex ? 'active' : ''}"
+                on:click={(e) => goToSlide(e, idx)}
+            ></span>
+          {/each}
+        </div>
+      {/if}
+
+    {:else if project.type === 'video' && project.videos}
+        <div class="carousel-images overflow-hidden relative">
+          <div 
+             class="carousel-track flex transition-transform duration-500"
+             style="transform: translateX(-{currentIndex * 100}%)"
+          >
+            {#each project.videos as video, idx}
+                {@const mp4Src = video.src.startsWith('/assets/') ? video.src.slice(1) : `assets/img/${video.src}`}
+                {@const webmSrc = mp4Src.replace(/\.mp4$/i, '.webm')}
+              <div class="relative w-full flex-shrink-0">
+                <div class="relative w-full h-72 bg-black/40 flex items-center justify-center overflow-hidden group/video">
+                  <video 
+                    class="digiturno-video w-full h-full object-cover cursor-pointer" 
+                    poster={toBase(`assets/img/${video.poster}`)}
+                    preload="none"
+                    playsinline
+                    loop
+                    muted
+                    data-video-src={toBase(mp4Src)}
+                    on:play={(e) => {
+                       e.currentTarget.classList.add('playing');
+                    }}
+                    on:pause={(e) => {
+                       e.currentTarget.classList.remove('playing');
+                    }}
+                    on:ended={(e) => {
+                        e.currentTarget.classList.remove('playing');
+                    }}
+                  >
+                    <source src={toBase(webmSrc)} type="video/webm" />
+                    <source src={toBase(mp4Src)} type="video/mp4" />
+                    Tu navegador no soporta el tag de video.
+                  </video>
+
+                  <button 
+                    class="expand-video absolute top-3 right-3 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2 transition-all duration-200 opacity-0 group-hover/video:opacity-100 z-10"
+                    on:click|stopPropagation={() => handleVideoClick(video)}
+                  >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+                    </svg>
+                  </button>
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <!-- svelte-ignore a11y-no-static-element-interactions -->
+                  <div 
+                    class="video-overlay absolute inset-0 bg-black/30 flex items-center justify-center transition-opacity duration-300 cursor-pointer"
+                    on:click|stopPropagation={(e) => {
+                      // Find the video sibling and play it
+                      const container = e.currentTarget.parentElement;
+                      const video = container?.querySelector('video');
+                      if (video) video.play();
+                    }}
+                  >
+                    <div class="play-button bg-white/20 backdrop-blur-md rounded-full p-6 border-2 border-white/60 transition-transform hover:scale-110">
+                      <svg class="w-12 h-12 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {/each}
+          </div>
+        </div>
+
+        {#if project.videos.length > 1}
+            <button on:click={prevSlide} class="carousel-btn prev absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100 z-10">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <button on:click={nextSlide} class="carousel-btn next absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm hover:bg-black/80 text-white rounded-full p-2.5 transition-all duration-200 opacity-0 group-hover:opacity-100 z-10">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+            <div class="carousel-dots absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                {#each project.videos as _, idx}
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <!-- svelte-ignore a11y-no-static-element-interactions -->
+                    <span 
+                        class="dot w-2 h-2 rounded-full bg-white/60 cursor-pointer backdrop-blur-sm transition-all duration-200 {idx === currentIndex ? 'active' : ''}"
+                        on:click={(e) => goToSlide(e, idx)}
+                    ></span>
+                {/each}
+            </div>
+        {/if}
+    {/if}
+  </div>
+
+  <!-- Project Info -->
+  <div class="p-6">
+    <div class="flex justify-between items-start mb-3">
+      <h3 class="text-xl font-semibold text-white group-hover:text-gray-100 transition-colors">
+        {project.title}
+      </h3>
+      {#if project.github}
+        <a 
+          href={project.github} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="text-xs px-2.5 py-1 rounded-full bg-purple-900/30 text-purple-300 border border-purple-700/50 backdrop-blur-sm hover:bg-purple-900/50 transition-colors flex items-center gap-1.5"
+        >
+          <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      {:else}
+        <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm">
+          {project.status}
+        </span>
+      {/if}
+    </div>
+    <p class="text-sm text-gray-400 mb-4 leading-relaxed">
+      {project.description}
+    </p>
+    <div class="flex flex-wrap gap-2">
+      {#each project.technologies as tech}
+        <span class="px-3 py-1 text-xs rounded-full bg-gray-800/70 text-gray-300 border border-gray-700/50 backdrop-blur-sm hover:bg-gray-800 transition-colors">
+          {tech}
+        </span>
+      {/each}
+    </div>
+  </div>
+</article>
+
+<style>
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Remove specific image constraints to let Tailwind classes work */
+  .carousel-image {
+    display: block;
+  }
+
+  .dot.active {
+    background-color: white;
+    transform: scale(1.2);
+  }
+  
+  .video-overlay {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 5;
+    cursor: pointer;
+  }
+  
+  /* Use global selector or deep selector since 'playing' class is added at runtime */
+  /* Svelte handles this if we target the element correctly */
+  :global(.digiturno-video.playing) ~ .video-overlay {
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>
