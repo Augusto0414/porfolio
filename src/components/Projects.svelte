@@ -3,7 +3,8 @@
   import ProjectCard from './ProjectCard.svelte';
   import { projects } from '../data/projects';
 
-  // --- Portal Action ---
+  const productivos = projects.filter(p => p.category === 'productivo' || !p.category);
+  const academicos = projects.filter(p => p.category === 'academico');
   function portal(node: HTMLElement) {
     let target = document.body;
     async function update() {
@@ -123,21 +124,44 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<div class="projects-wrapper">
-  <div class="mb-8">
-    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">Proyectos</h2>
-    <p class="text-base text-gray-500">Aplicaciones que he desarrollado</p>
+<div class="projects-wrapper space-y-16">
+  <!-- Section: Productivos -->
+  <div>
+    <div class="mb-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">Entornos Productivos</h2>
+      <p class="text-base text-gray-500">Proyectos desarrollados para empresas y clientes reales</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {#each productivos as project (project.id)}
+        <ProjectCard 
+          {project} 
+          on:openImageLightbox={handleOpenImageLightbox}
+          on:openVideoLightbox={handleOpenVideoLightbox}
+        />
+      {/each}
+    </div>
   </div>
-  
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {#each projects as project (project.id)}
-      <ProjectCard 
-        {project} 
-        on:openImageLightbox={handleOpenImageLightbox}
-        on:openVideoLightbox={handleOpenVideoLightbox}
-      />
-    {/each}
-  </div>
+
+  <!-- Section: Académicos -->
+  {#if academicos.length > 0}
+    <div>
+      <div class="mb-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2">Proyectos Académicos y Personales</h2>
+        <p class="text-base text-gray-500">Desarrollos universitarios, clones y prácticas de código</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {#each academicos as project (project.id)}
+          <ProjectCard 
+            {project} 
+            on:openImageLightbox={handleOpenImageLightbox}
+            on:openVideoLightbox={handleOpenVideoLightbox}
+          />
+        {/each}
+      </div>
+    </div>
+  {/if}
 
   <!-- Image Lightbox -->
   {#if isLightboxOpen}

@@ -14,6 +14,7 @@ export interface Project {
     src: string;
     poster: string;
   }[];
+  category?: "productivo" | "academico";
 }
 
 export const projects: Project[] = [
@@ -23,6 +24,7 @@ export const projects: Project[] = [
     description:
       "Aplicación móvil para consultores agrícolas con autenticación Firebase, notificaciones locales y lock screen.",
     status: "Privado",
+    category: "productivo",
     type: "carousel",
     technologies: ["React Native", "Firebase", "TypeScript"],
     images: [
@@ -38,6 +40,7 @@ export const projects: Project[] = [
     description:
       "Aplicación móvil de viajes con React Native y panel administrativo con gestión de estado usando Zustand.",
     status: "Privado",
+    category: "productivo",
     type: "carousel",
     technologies: ["React Native", "React", "Tailwind", "Zustand"],
     images: [
@@ -53,6 +56,7 @@ export const projects: Project[] = [
     description:
       "Plataforma para músicos y clientes con gestión de disponibilidad y perfiles desarrollada en Flutter y Firebase.",
     status: "Privado",
+    category: "productivo",
     type: "carousel",
     technologies: ["Flutter", "Dart", "Node.js", "MongoDB"],
     images: [
@@ -68,6 +72,7 @@ export const projects: Project[] = [
     description:
       "App Flutter con visión computacional, modelo IA en Python y API REST en FastAPI desplegada con Docker.",
     status: "Privado",
+    category: "productivo",
     type: "carousel",
     technologies: ["Flutter", "Python", "FastAPI", "ML"],
     images: [
@@ -83,6 +88,7 @@ export const projects: Project[] = [
     description:
       "Clon de la aplicación NuBank desarrollado como proyecto personal para practicar desarrollo móvil moderno y diseño de interfaces financieras.",
     status: "Público",
+    category: "productivo",
     type: "carousel",
     github: "https://github.com/Augusto0414/NuBank-Clone",
     technologies: ["React Native", "TypeScript", "Mobile"],
@@ -99,6 +105,7 @@ export const projects: Project[] = [
     description:
       "Sistema completo de call center con gestión de llamadas, agentes y reportes en tiempo real desarrollado con tecnologías modernas.",
     status: "Privado",
+    category: "productivo",
     type: "carousel",
     technologies: ["React", "Micronaut", "Zustand", "WhatsApp API"],
     images: [
@@ -114,6 +121,7 @@ export const projects: Project[] = [
     description:
       "Sistema digital de gestión de turnos multitenant para hospitales con gestión de colas, notificaciones en tiempo real y panel administrativo.",
     status: "Privado",
+    category: "productivo",
     type: "video",
     technologies: ["React", "TypeScript", "Multitenant", "Real-time"],
     videos: [
@@ -126,5 +134,93 @@ export const projects: Project[] = [
         poster: "DigiTurno/WhatsApp Image 2026-01-14 at 4.04.35 PM.jpeg",
       },
     ],
+  },
+  {
+    id: "acadocen",
+    title: "ACADOCEN",
+    description:
+      "Proyecto universitario en Flutter para la gestión académica de docentes y estudiantes.",
+    status: "Público",
+    category: "academico",
+    type: "carousel",
+    github: "https://github.com/Augusto0414/ACADOCEN-1",
+    technologies: ["Flutter", "Dart", "Mobile"],
+  },
+  {
+    id: "calculadora-ie",
+    title: "Calculadora IE",
+    description:
+      "Aplicación móvil para el cálculo de operaciones financieras como interés simple, compuesto y devengado.",
+    status: "Público",
+    category: "academico",
+    type: "carousel",
+    github: "https://github.com/Augusto0414/Calculadora_IE",
+    technologies: ["Flutter", "Dart", "Android"],
+  },
+  {
+    id: "rest-api-mysql",
+    title: "REST API MySQL",
+    description:
+      "API REST modular para gestión de entidades con operaciones CRUD, conectada a MySQL.",
+    status: "Público",
+    category: "academico",
+    type: "carousel",
+    github: "https://github.com/Augusto0414/Rest-Api-Mysql",
+    technologies: ["Node.js", "JavaScript", "MySQL", "API REST"],
+  },
+  {
+    id: "iclinic",
+    title: "IClinic",
+    description:
+      "Sistema de gestión clínica con arquitectura en capas para el manejo de pacientes e historias médicas.",
+    status: "Público",
+    category: "academico",
+    type: "carousel",
+    github: "https://github.com/Augusto0414/Proyecto-IClinic-1",
+    technologies: [".NET", "C#", "SQL Server"],
+  },
+  {
+    id: "manito-creativa",
+    title: "Manito Creativa",
+    description:
+      "Proyecto desarrollado con .NET para la gestión de datos y almacenamiento.",
+    status: "Público",
+    category: "academico",
+    type: "carousel",
+    github: "https://github.com/Augusto0414/ManitoCreativa",
+    technologies: [".NET", "C#"],
+  },
+  {
+    id: "blackjack",
+    title: "Blackjack Web",
+    description:
+      "Juego clásico de Blackjack desarrollado en la web utilizando JavaScript Vanilla y Vite.",
+    status: "Público",
+    category: "academico",
+    type: "carousel",
+    github: "https://github.com/Augusto0414/blackjack-vite",
+    technologies: ["JavaScript", "Vite", "HTML/CSS"],
+  },
+  {
+    id: "wallet-movement-api",
+    title: "Wallet Movement API",
+    description:
+      "API para el registro y gestión de movimientos de billetera, desarrollada en Node.js con NestJS.",
+    status: "Público",
+    category: "academico",
+    type: "carousel",
+    github: "https://github.com/Augusto0414/wallet-movement-api",
+    technologies: ["Node.js", "Nest.js", "TypeScript"],
+  },
+  {
+    id: "wompi-api",
+    title: "Wompi API Integration",
+    description:
+      "Integración con pasarela de pagos Wompi desarrollada mediante una API con Node.js y NestJS.",
+    status: "Público",
+    category: "academico",
+    type: "carousel",
+    github: "https://github.com/Augusto0414/wompi-api",
+    technologies: ["Node.js", "Nest.js", "TypeScript", "Payments"],
   },
 ];
